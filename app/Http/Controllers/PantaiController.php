@@ -7,6 +7,7 @@ use Yajra\DataTables\DataTables;
 use App\Http\Requests\PantaiRequest;
 use App\Models\CitraSatelit;
 use App\Models\JenisMangrove;
+use App\Models\PantaiImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,15 @@ class PantaiController extends Controller
 {
     public function json()
     {
-        $pantais = Pantais::select(['id', 'nama_pantai', 'lokasi_pantai', 'longitude', 'latitude', 'komen', 'image', 'video'])->get();
+        $pantais = Pantais::select([
+            'id',
+            'nama_pantai',
+            'lokasi_pantai',
+            'longitude',
+            'latitude',
+            'komen',
+            'video'
+        ])->get();
         $index = 1;
         return DataTables::of($pantais)
             ->addColumn('DT_RowIndex', function ($data) use (&$index) {
@@ -134,7 +143,12 @@ class PantaiController extends Controller
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $file) {
                 $imagePath = $file->store('images_pantai', 'public');
-                $pantai->pantaiImages()->create(['path' => $imagePath]);
+                PantaiImage::create(
+                    [
+                        'path' => $imagePath,
+                        'pantai_id' => $pantai->id
+                    ]
+                );
             }
         }
 
@@ -143,15 +157,24 @@ class PantaiController extends Controller
 
     public function show($id)
     {
-        $pantai = Pantais::findOrFail($id);
-        $pantai_id = $pantai->pluck('id')->first();
-        return view('admin.pantai.show', compact('pantai','pantai_id'));
+        $pantai = Pantais::select(
+            'pantais.id',
+            'pantais.nama_pantai',
+            'pantais.lokasi_pantai',
+            'pantais.longitude',
+            'pantais.latitude',
+            'pantais.komen',
+            'pantais.video',
+        )
+            ->with('pantaiImages')
+            ->where('pantais.id', $id)->first();
+        return view('admin.pantai.show', compact('pantai'));
     }
 
     public function showcitra($id)
     {
         $pantai = Pantais::findOrFail($id);
-        $citra = CitraSatelit::where('id',$pantai->id)->first();
+        $citra = CitraSatelit::where('id', $pantai->id)->first();
         return view('admin.pantai.show', compact('pantai'));
     }
 
@@ -168,21 +191,28 @@ class PantaiController extends Controller
         $pantai = Pantais::findOrFail($id);
         return view('admin.pantai.verifikasi', compact('pantai'));
     }
-    
-    public function update(Request $request, $id)
+
+    public function update(PantaiRequest $request, $id)
     {
+        // Validasi input
         $validatedData = $request->validate([
-            'nama_pantai' => 'required',
-            'lokasi_pantai' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'image' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
-            'video' => 'nullable|file|max:10000',
-            'jenis_mangrove_id' => 'required|array', // Tipe data array
-            'jenis_mangrove_id.*' => 'exists:jenis_mangroves,id', // Pastikan semua nilai ada di tabel jenis_mangroves
+            'nama_pantai' => 'required|string',
+            'lokasi_pantai' => 'required|string',
+            'longitude' => 'required|string',
+            'latitude' => 'required|string',
+            'jenis_mangrove_id' => 'required|array',
+            'jenis_mangrove_id.*' => 'exists:jenis_mangroves,id',
+            'image.*' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
+            'video' => 'nullable|file|max:10000', // Validasi ukuran maksimum video
         ]);
 
         $pantai = Pantais::findOrFail($id);
+
+        // Periksa apakah nama pantai sudah ada dan berbeda dari nama pantai saat ini
+        if (Pantais::where('nama_pantai', $validatedData['nama_pantai'])->where('id', '!=', $id)->exists()) {
+            return redirect()->back()->withErrors(['nama_pantai' => 'Nama pantai sudah terdaftar.'])->withInput();
+        }
+
         $pantai->nama_pantai = $validatedData['nama_pantai'];
         $pantai->lokasi_pantai = $validatedData['lokasi_pantai'];
         $pantai->longitude = $validatedData['longitude'];
@@ -190,10 +220,21 @@ class PantaiController extends Controller
 
         // Periksa apakah gambar baru dikirim
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($pantai->image);
-            $imagePath = $request->file('image')->store('images_pantai', 'public');
-            $pantai->image = $imagePath;
-            //dd($imagePath);
+            // Hapus gambar lama
+            $imagePantai = PantaiImage::where('pantai_id', $pantai->id)->get();
+            foreach ($imagePantai as $image) {
+                Storage::disk('public')->delete($image->path);
+                $image->delete();
+            }
+
+            // Upload gambar baru
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('images_pantai', 'public');
+                PantaiImage::create([
+                    'path' => $imagePath,
+                    'pantai_id' => $pantai->id
+                ]);
+            }
         }
 
         // Periksa apakah video baru dikirim
@@ -201,14 +242,17 @@ class PantaiController extends Controller
             Storage::disk('public')->delete($pantai->video);
             $videoPath = $request->file('video')->store('videos_pantai', 'public');
             $pantai->video = $videoPath;
-            //dd($videoPath);
         }
+
+        // Update jenis mangrove
         $pantai->jenisMangroves()->sync($validatedData['jenis_mangrove_id']);
-        //dd($request->all());
+
         $pantai->save();
 
-        return redirect('/dashboard_admin/pantai')->with('success', 'Pantai updated successfully.');
+        return redirect('/dashboard_admin/pantai')->with('success', 'Pantai berhasil diperbarui.');
     }
+
+
 
     public function verifikasiLaporan(Request $request, $id)
     {

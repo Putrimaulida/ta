@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('longitude');
             $table->string('latitude');
             $table->string('komen')->nullable();
-            $table->string('image');
             $table->string('video');
             $table->tinyInteger('status')->comment('0:menunggu, 1:diterima, 2:ditolak');
             $table->timestamps();

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PantaiImage extends Model
 {
     use HasFactory;
+    protected $table = 'pantai_images';
     protected $fillable = ['pantai_id', 'path'];
 
     public function pantai()

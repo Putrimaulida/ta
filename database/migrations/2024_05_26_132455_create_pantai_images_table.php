@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('pantai_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pantai_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('pantai_id');
             $table->string('path');
+            $table->foreign('pantai_id')->references('id')->on('pantais')->onDelete('cascade');
             $table->timestamps();
         });
     }

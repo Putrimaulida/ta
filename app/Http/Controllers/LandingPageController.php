@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
-    public function indexBeranda(){
-        $dataPantai = Pantais::all();
+    public function indexBeranda()
+    {
+        $dataPantai = Pantais::with('pantaiImages')->get();
         $dataMangrove = JenisMangrove::all();
         $dataRekomendasiPantai = Pantais::all();
         $allYears = CitraSatelit::select('tahun')->distinct()->pluck('tahun');

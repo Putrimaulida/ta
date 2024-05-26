@@ -17,7 +17,6 @@ class Pantais extends Model
         'longitude',
         'latitude',
         'komen',
-        'image',
         'video',
         'status',
     ];
@@ -34,6 +33,6 @@ class Pantais extends Model
 
     public function pantaiImages()
     {
-        return $this->hasMany(PantaiImage::class);
+        return $this->hasMany(PantaiImage::class, 'pantai_id');
     }
 }

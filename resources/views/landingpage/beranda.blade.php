@@ -9,7 +9,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -22,11 +23,15 @@
     <!-- <link href="assets/img/favicon.png" rel="icon"> -->
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -243,6 +248,36 @@
             border-radius: 5px;
             -moz-border-radius: 5px 5px 5px 5px;
         }
+
+        .carousel-inner img {
+            max-height: 300px;
+            /* Sesuaikan tinggi maksimal gambar */
+            object-fit: cover;
+            /* Menjaga rasio aspek gambar */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            top: 50%;
+            /* Menyelaraskan tombol di tengah vertikal */
+            transform: translateY(-50%);
+            width: 5%;
+            /* Lebar tombol */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-size: 100%, 100%;
+            /* Ukuran ikon */
+        }
+
+        .why-us .accordion-list li {
+            padding: none !important;
+            background: #fff;
+            border-radius: none !important;
+            margin-top: 0px !important;
+        }
+    </style>
     </style>
 </head>
 
@@ -271,11 +306,13 @@
     </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center" style="background-image: url('assets/images/mangrove5.jpg');  background-repeat: no-repeat; background-size: cover;">
+    <section id="hero" class="d-flex align-items-center"
+        style="background-image: url('assets/images/mangrove5.jpg');  background-repeat: no-repeat; background-size: cover;">
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                    data-aos="fade-up" data-aos-delay="200">
                     <h1 style="font-size:34px;">Pengelolaan Vegetasi Mangorve</h1>
                     <h1>Mangrove.In Siap Melayani!</h1>
                     <h2>Informasi Seputar Perkembangan dan Pengelolaan Vegetasi Mangrove Kabupaten Malang Selatan</h2>
@@ -308,9 +345,12 @@
                 <div class="row content">
                     <div class="col-lg-6">
                         <p style="text-align: justify;">
-                            Sistem Informasi Pengelolaan Vegetasi Mangrove berkomitmen untuk memberikan layanan terbaik dalam
-                            menjaga kelestarian ekosistem wilayah pesisir. Dengan semangat pelayanan yang unggul, kami bertekad untuk
-                            meningkatkan kualitas hidup masyarakat melalui aksesibilitas, efisiensi, dan kepedulian terhadap lingkungan.
+                            Sistem Informasi Pengelolaan Vegetasi Mangrove berkomitmen untuk memberikan layanan terbaik
+                            dalam
+                            menjaga kelestarian ekosistem wilayah pesisir. Dengan semangat pelayanan yang unggul, kami
+                            bertekad untuk
+                            meningkatkan kualitas hidup masyarakat melalui aksesibilitas, efisiensi, dan kepedulian
+                            terhadap lingkungan.
                         </p>
                         <ul>
                             <li><i class="ri-check-double-line"></i> Pelayanan Unggul: Memberikan layanan dengan
@@ -325,17 +365,22 @@
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
                         <p style="text-align: justify;">
-                            Kami yakin bahwa menangani informasi pengelolaan vegetasi mangrove dengan baik adalah kunci untuk membangun
-                            sebuah ekosistem yang ramah lingkungan dan kepedulian masyarakat terhadap lingkungan dapat meningkat. Setiap pengaduan yang kami tangani adalah
+                            Kami yakin bahwa menangani informasi pengelolaan vegetasi mangrove dengan baik adalah kunci
+                            untuk membangun
+                            sebuah ekosistem yang ramah lingkungan dan kepedulian masyarakat terhadap lingkungan dapat
+                            meningkat. Setiap pengaduan yang kami tangani adalah
                             kontribusi nyata bagi kemajuan masyarakat secara keseluruhan. Informasi ini diharapkan
-                            dapat membantu dalam menjaga kelestarian ekosistem ditiap periodenya berdasarkan garis trendnya.
+                            dapat membantu dalam menjaga kelestarian ekosistem ditiap periodenya berdasarkan garis
+                            trendnya.
                             Komunikasi yang jujur
                             dan terbuka merupakan dasar bagi hubungan yang kuat antara kami dan masyarakat yang kami
                             layani. Perubahan yang kami ciptakan hari ini adalah investasi bagi masa depan yang lebih
                             baik. Bersama-sama, mari membangun
                             masyarakat yang lebih baik dan sejahtera untuk generasi mendatang. Terima kasih atas
-                            dukungan dan kepercayaan Anda dalam sistem pengelolaan vegetasi mangrove ini. Mari bersama-sama
-                            menciptakan kelestarian ekositem mangrove yang lebih baik dan memberdayakan seluruh masyarakat
+                            dukungan dan kepercayaan Anda dalam sistem pengelolaan vegetasi mangrove ini. Mari
+                            bersama-sama
+                            menciptakan kelestarian ekositem mangrove yang lebih baik dan memberdayakan seluruh
+                            masyarakat
                             untuk mencapai kesejahteraan dan kemajuan bersama.
                         </p>
                         {{-- <a href="#" class="btn-learn-more">Learn More</a> --}}
@@ -358,56 +403,104 @@
                         </div>
                     </div>
                     <!-- Kolom Kiri -->
-                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
+                    <div
+                        class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
                         <div class="accordion-list">
                             <ul>
-                                @foreach($dataPantai->slice(0, ceil($dataPantai->count() / 2)) as $nomor => $pantai)
-                                <li>
-                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{ $pantai->id }}" style="text-decoration: none;">
-                                        <span>{{$nomor + 1}}</span> {{$pantai->nama_pantai}} 
-                                        <i class="bx bx-chevron-down icon-show"></i>
-                                        <i class="bx bx-chevron-up icon-close"></i>
-                                    </a>
-                                    <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
-                                        <p style="text-align: justify;">
-                                            Alamat : {{$pantai->lokasi_pantai}}
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            Keterangan : {{$pantai->komen}}
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <img src="{{ asset('storage/' . $pantai->image) }}" alt="{{ $pantai->nama_pantai }}" class="pantai-image" style="max-width: 300px; height: auto;">
-                                        </p>
-                                    </div>
-                                </li>
+                                @foreach ($dataPantai->slice(0, ceil($dataPantai->count() / 2)) as $nomor => $pantai)
+                                    <li>
+                                        <a data-bs-toggle="collapse" class="collapse"
+                                            data-bs-target="#accordion-list-{{ $pantai->id }}"
+                                            style="text-decoration: none;">
+                                            <span>{{ $nomor + 1 }}</span> {{ $pantai->nama_pantai }}
+                                            <i class="bx bx-chevron-down icon-show"></i>
+                                            <i class="bx bx-chevron-up icon-close"></i>
+                                        </a>
+                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse"
+                                            data-bs-parent=".accordion-list">
+                                            <p style="text-align: justify;">
+                                                Alamat : {{ $pantai->lokasi_pantai }}
+                                            </p>
+                                            <p style="text-align: justify;">
+                                                Keterangan : {{ $pantai->komen }}
+                                            </p>
+                                            @if ($pantai->pantaiImages)
+                                                <div id="carouselExampleIndicators-{{ $pantai->id }}"
+                                                    class="carousel slide" data-bs-ride="carousel"
+                                                    style="max-width: 100%;">
+                                                    <ol class="carousel-indicators">
+                                                        @foreach ($pantai->pantaiImages as $listfoto)
+                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}"
+                                                                data-bs-slide-to="{{ $loop->index }}"
+                                                                class="{{ $loop->first ? 'active' : '' }}"></li>
+                                                        @endforeach
+                                                    </ol>
+                                                    <div class="carousel-inner">
+                                                        @foreach ($pantai->pantaiImages as $listfoto)
+                                                            <div
+                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block w-100" style="height: 350px;"
+                                                                    src="{{ asset('storage/' . $listfoto->path) }}"
+                                                                    alt="Gambar Pantai">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
                     <!-- Kolom Kanan -->
-                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
+                    <div
+                        class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
                         <div class="accordion-list">
                             <ul>
                                 @php $offset = ceil($dataPantai->count() / 2); @endphp
-                                @foreach($dataPantai->slice($offset) as $nomor => $pantai)
-                                <li>
-                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{ $pantai->id }}" style="text-decoration: none;">
-                                    <span>{{$nomor + 1}}</span> {{$pantai->nama_pantai}} 
-                                        <i class="bx bx-chevron-down icon-show"></i>
-                                        <i class="bx bx-chevron-up icon-close"></i>
-                                    </a>
-                                    <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
-                                        <p style="text-align: justify;">
-                                            Alamat : {{$pantai->lokasi_pantai}}
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            Keterangan : {{$pantai->komen}}
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            <img src="{{ asset('storage/' . $pantai->image) }}" alt="{{ $pantai->nama_pantai }}" class="pantai-image" style="max-width: 300px; height: auto;">
-                                        </p>
-                                    </div>
-                                </li>
+                                @foreach ($dataPantai->slice($offset) as $nomor => $pantai)
+                                    <li>
+                                        <a data-bs-toggle="collapse" class="collapse"
+                                            data-bs-target="#accordion-list-{{ $pantai->id }}"
+                                            style="text-decoration: none;">
+                                            <span>{{ $nomor + 1 }}</span> {{ $pantai->nama_pantai }}
+                                            <i class="bx bx-chevron-down icon-show"></i>
+                                            <i class="bx bx-chevron-up icon-close"></i>
+                                        </a>
+                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse"
+                                            data-bs-parent=".accordion-list">
+                                            <p style="text-align: justify;">
+                                                Alamat : {{ $pantai->lokasi_pantai }}
+                                            </p>
+                                            <p style="text-align: justify;">
+                                                Keterangan : {{ $pantai->komen }}
+                                            </p>
+                                            @if ($pantai->pantaiImages)
+                                                <div id="carouselExampleIndicators-{{ $pantai->id }}"
+                                                    class="carousel slide" data-bs-ride="carousel"
+                                                    style="max-width: 100%;">
+                                                    <ol class="carousel-indicators">
+                                                        @foreach ($pantai->pantaiImages as $listfoto)
+                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}"
+                                                                data-bs-slide-to="{{ $loop->index }}"
+                                                                class="{{ $loop->first ? 'active' : '' }}"></li>
+                                                        @endforeach
+                                                    </ol>
+                                                    <div class="carousel-inner">
+                                                        @foreach ($pantai->pantaiImages as $listfoto)
+                                                            <div
+                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block w-100"
+                                                                    src="{{ asset('storage/' . $listfoto->path) }}"
+                                                                    alt="Gambar Pantai">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -415,6 +508,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- ======= Services Section ======= -->
         <section id="mangrove" class="contact">
@@ -427,19 +521,22 @@
                     <div class="col-md-6">
                         <div class="accordion-list">
                             <ul>
-                                @foreach($dataMangrove as $mangrove)
-                                <li>
-                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{$loop->index + 1}}" style="text-decoration: none;">
-                                        <span>{{$loop->iteration}}</span> {{$mangrove->nama_pantai}} 
-                                        <i class="bx bx-chevron-down icon-show"></i>
-                                        <i class="bx bx-chevron-up icon-close"></i>
-                                    </a>
-                                    <div id="accordion-list-{{$loop->index + 1}}" class="collapse show" data-bs-parent=".accordion-list">
-                                        <p style="text-align: justify;">
-                                            {{$mangrove->nama_ilmiah}}
-                                        </p>
-                                    </div>
-                                </li>
+                                @foreach ($dataMangrove as $mangrove)
+                                    <li>
+                                        <a data-bs-toggle="collapse" class="collapse"
+                                            data-bs-target="#accordion-list-{{ $loop->index + 1 }}"
+                                            style="text-decoration: none;">
+                                            <span>{{ $loop->iteration }}</span> {{ $mangrove->nama_pantai }}
+                                            <i class="bx bx-chevron-down icon-show"></i>
+                                            <i class="bx bx-chevron-up icon-close"></i>
+                                        </a>
+                                        <div id="accordion-list-{{ $loop->index + 1 }}" class="collapse show"
+                                            data-bs-parent=".accordion-list">
+                                            <p style="text-align: justify;">
+                                                {{ $mangrove->nama_ilmiah }}
+                                            </p>
+                                        </div>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -453,13 +550,13 @@
                 <div class="section-title">
                     <h2>Hasil Analisis</h2>
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
                     <div class="form-group col-md-3">
@@ -467,9 +564,9 @@
                         <select name="pantai_id" id="pantai_id" class="form-control" required>
                             <option value="all">All</option>
                             @foreach ($dataRekomendasiPantai as $pantai)
-                            <option value="{{ $pantai->id }}">
-                                {{ $pantai->nama_pantai }}
-                            </option>
+                                <option value="{{ $pantai->id }}">
+                                    {{ $pantai->nama_pantai }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -479,7 +576,7 @@
                         <select name="tahun" id="tahun" class="form-control">
                             <option value="all">All</option>
                             @foreach ($allYears as $year)
-                            <option value="{{ $year }}">{{ $year }}</option>
+                                <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -487,7 +584,8 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             {{-- <a href="#" class="btn btn-secondary">Back</a> --}}
-                            <button type="submit" onclick="countRekomendasi()" class="btn btn-primary">Kirim</button>
+                            <button type="submit" onclick="countRekomendasi()"
+                                class="btn btn-primary">Kirim</button>
                         </div>
                     </div>
 
@@ -788,7 +886,8 @@
                                         <button id="toggleControls" class="btn btn-info">Toggle Controls</button>
                                         <div id="controls" class="d-none">
                                             <div class="input-group mb-3">
-                                                <input type="text" id="search" class="form-control" placeholder="Cari Departemen">
+                                                <input type="text" id="search" class="form-control"
+                                                    placeholder="Cari Departemen">
                                                 <button onclick="searchDepartment()" class="btn btn-primary">
                                                     <i class="fas fa-search"></i>
                                                 </button>
@@ -798,7 +897,8 @@
                                                 </button>
                                             </div>
                                             <label class="custom-checkbox">Tampilkan Marker
-                                                <input type="checkbox" id="toggleMarker" checked onchange="toggleMarker()">
+                                                <input type="checkbox" id="toggleMarker" checked
+                                                    onchange="toggleMarker()">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -948,7 +1048,8 @@
         </div>
         </div> --}}
 
-        <div class="modal fade" id="trackResultModal" tabindex="-1" role="dialog" aria-labelledby="trackResultModalLabel" aria-hidden="true">
+        <div class="modal fade" id="trackResultModal" tabindex="-1" role="dialog"
+            aria-labelledby="trackResultModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1008,10 +1109,14 @@
                         <h4>Temukan Kami di Media Sosial</h4>
                         <p>Ikuti kami untuk informasi terbaru dan interaksi lebih lanjut.</p>
                         <div class="social-links mt-3">
-                            <a href="https://www.twitter.com/pemkabpasuruan_" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="https://www.facebook.com/pasuruankab.go.id/" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="https://www.instagram.com/pemkabpasuruan/" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="https://www.youtube.com/@ILOVEPASTV" class="google-plus"><i class="bx bxl-youtube"></i></a>
+                            <a href="https://www.twitter.com/pemkabpasuruan_" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/pasuruankab.go.id/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/pemkabpasuruan/" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.youtube.com/@ILOVEPASTV" class="google-plus"><i
+                                    class="bx bxl-youtube"></i></a>
                             {{-- <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> --}}
                         </div>
                     </div>
@@ -1035,13 +1140,17 @@
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Tombol "like" -->
     <!-- Tombol "like" -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
 
