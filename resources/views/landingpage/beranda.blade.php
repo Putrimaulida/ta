@@ -345,28 +345,32 @@
             </div>
         </section><!-- End About Us Section -->
 
-        <!-- ======= Why Us Section ======= -->
         <section id="pantai" class="why-us section-bg">
             <div class="container-fluid" data-aos="fade-up">
                 <div class="row">
-                    <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+                    <!-- Bagian Tengah untuk Data Pantai -->
+                    <div class="col-12 text-center">
                         <div class="content">
                             <h3>Data <strong>Pantai</strong></h3>
                             <p style="text-align: justify;">
                                 Berikut data pantai yang ada di Kabupaten Malang Selatan
                             </p>
                         </div>
+                    </div>
+                    <!-- Kolom Kiri -->
+                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
                         <div class="accordion-list">
                             <ul>
-                                @foreach($dataPantai as $nomor => $pantai)
+                                @foreach($dataPantai->slice(0, ceil($dataPantai->count() / 2)) as $nomor => $pantai)
                                 <li>
-                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{ $pantai->id }}" style="text-decoration: none;"><span>{{$nomor + 1}}</span> {{$pantai -> nama_pantai}} <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{ $pantai->id }}" style="text-decoration: none;">
+                                        <span>{{$nomor + 1}}</span> {{$pantai->nama_pantai}} 
+                                        <i class="bx bx-chevron-down icon-show"></i>
+                                        <i class="bx bx-chevron-up icon-close"></i>
+                                    </a>
                                     <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
                                         <p style="text-align: justify;">
                                             Alamat : {{$pantai->lokasi_pantai}}
-                                        </p>
-                                        <p style="text-align: justify;">
-                                            Keterangan : {{$pantai->nama_ilmiah}}
                                         </p>
                                         <p style="text-align: justify;">
                                             Keterangan : {{$pantai->komen}}
@@ -380,42 +384,74 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+                    <!-- Kolom Kanan -->
+                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
+                        <div class="accordion-list">
+                            <ul>
+                                @php $offset = ceil($dataPantai->count() / 2); @endphp
+                                @foreach($dataPantai->slice($offset) as $nomor => $pantai)
+                                <li>
+                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{ $pantai->id }}" style="text-decoration: none;">
+                                    <span>{{$nomor + 1}}</span> {{$pantai->nama_pantai}} 
+                                        <i class="bx bx-chevron-down icon-show"></i>
+                                        <i class="bx bx-chevron-up icon-close"></i>
+                                    </a>
+                                    <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
+                                        <p style="text-align: justify;">
+                                            Alamat : {{$pantai->lokasi_pantai}}
+                                        </p>
+                                        <p style="text-align: justify;">
+                                            Keterangan : {{$pantai->komen}}
+                                        </p>
+                                        <p style="text-align: justify;">
+                                            <img src="{{ asset('storage/' . $pantai->image) }}" alt="{{ $pantai->nama_pantai }}" class="pantai-image" style="max-width: 300px; height: auto;">
+                                        </p>
+                                    </div>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-        </section><!-- End Why Us Section -->
+        </section>
 
         <!-- ======= Services Section ======= -->
         <section id="mangrove" class="contact">
-            <div class="container">
-
+            <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Jenis Mangrove</h2>
                     <p>Sistem Pengelolaan Vegetasi Mangrove!</p>
                 </div>
-                <div class="accordion-list">
-                    <ul>
-                        @foreach($dataMangrove as $mangrove)
-                        <li>
-                            <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1" style="text-decoration: none;"><span>{{$nomor + 1}}</span> {{$pantai -> nama_pantai}} <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                            <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                                <p style="text-align: justify;">
-                                    {{$mangrove -> nama_ilmiah}}
-                                </p>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="accordion-list">
+                            <ul>
+                                @foreach($dataMangrove as $mangrove)
+                                <li>
+                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-{{$loop->index + 1}}" style="text-decoration: none;">
+                                        <span>{{$loop->iteration}}</span> {{$mangrove->nama_pantai}} 
+                                        <i class="bx bx-chevron-down icon-show"></i>
+                                        <i class="bx bx-chevron-up icon-close"></i>
+                                    </a>
+                                    <div id="accordion-list-{{$loop->index + 1}}" class="collapse show" data-bs-parent=".accordion-list">
+                                        <p style="text-align: justify;">
+                                            {{$mangrove->nama_ilmiah}}
+                                        </p>
+                                    </div>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="rekomendasi" class="team section-bg">
-            <div class="container">
+            <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Hasil Analisis</h2>
-
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -697,54 +733,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-
-                    <div class="row justify-content-center">
-                        <div class="col-lg-12">
-                            <div class="member-carousel">
-                                <!--  -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="tugasModal" tabindex="-1" role="dialog" aria-labelledby="tugasModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="tugasModalLabel">TUGAS</h5>
-                                    <button type="button" class="close" data-dismiss="modal" id="closeModalX1">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Duties will be loaded here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    {{-- <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="member d-flex align-items-start">
-                            <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid"
-                                    alt=""></div>
-                            <div class="member-info">
-                                <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                                <div class="social">
-                                    <a href=""><i class="ri-twitter-fill"></i></a>
-                                    <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href=""><i class="ri-instagram-fill"></i></a>
-                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
-                </div>
-
             </div>
         </section><!-- End Team Section -->
 
@@ -1188,76 +1176,6 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     @include('landingpage.trackticketjs')
-    @push('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('pantai_id').addEventListener('change', fetchData);
-            document.getElementById('tahun').addEventListener('change', fetchData);
-
-
-
-            function fetchData() {
-                const pantaiId = document.getElementById('pantai_id').value;
-                const tahun = document.getElementById('tahun').value;
-
-                fetch(`/countRecommendedBeranda?pantai_id=${pantaiId}&tahun=${tahun}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            renderChart(data.data);
-                            if (data.data.conclusion) {
-                                document.getElementById('conclusion').hidden = false;
-                                document.getElementById('text-conclusion').innerHTML = data.data.conclusion;
-                            }
-                        }
-                    });
-            }
-
-            function renderChart(data) {
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const labels = Object.keys(data.luasan_tiap_tahun);
-                const dataset = Object.values(data.luasan_tiap_tahun);
-
-                const chartData = {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Luasan Mangrove',
-                        data: dataset,
-                        borderColor: data.borderColor,
-                        borderWidth: 1,
-                        fill: false
-                    }]
-                };
-
-                new Chart(ctx, {
-                    type: 'line',
-                    data: chartData,
-                    options: {
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Tahun'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Luasan (ha)'
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Initial fetch to populate chart
-            fetchData();
-        });
-    </script>
-
-    @endpush
 </body>
 
 </html>

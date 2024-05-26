@@ -31,4 +31,9 @@ class Pantais extends Model
     {
         return $this->belongsToMany(JenisMangrove::class, 'pantai_jenis_mangrove', 'pantai_id', 'jenis_mangrove_id');
     }
+
+    public function pantaiImages()
+    {
+        return $this->hasMany(PantaiImage::class);
+    }
 }
