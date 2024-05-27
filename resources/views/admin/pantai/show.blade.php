@@ -24,6 +24,7 @@
                                     Untuk melihat data citra satelit, silakan <a href="{{ url('dashboard_admin/citra') . '/' . $pantai->id }}">klik di sini</a>. 
                                     Sedangkan untuk data lapang, <a href="{{ url('dashboard_admin/lapang') }}">klik di sini</a>.
                                 </p>
+                                
                                 @if ($pantai->status == 1)
                                     <p>
                                         Laporan mengenai pantai ini: {{ $pantai->komen }}.

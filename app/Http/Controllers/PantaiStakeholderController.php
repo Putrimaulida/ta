@@ -7,6 +7,7 @@ use Yajra\DataTables\DataTables;
 use App\Http\Requests\PantaiRequest;
 use App\Models\CitraSatelit;
 use App\Models\JenisMangrove;
+use App\Models\PantaiImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,7 @@ class PantaiStakeholderController extends Controller
 
     public function json()
         {
-            $pantais = Pantais::select(['id', 'nama_pantai', 'lokasi_pantai', 'longitude', 'latitude', 'komen', 'image', 'video'])
+            $pantais = Pantais::select(['id', 'nama_pantai', 'lokasi_pantai', 'longitude', 'latitude'])
                 ->get();
             $index = 1;
             return DataTables::of($pantais)
@@ -60,31 +61,37 @@ class PantaiStakeholderController extends Controller
     
     public function update(Request $request, $id)
     {
+        // Validasi input
         $validatedData = $request->validate([
             'komen' => 'required',
-            'image' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
-            'video' => 'nullable|file|max:10000',
+            'image.*' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
+            'video' => 'required|string', // Validasi ukuran maksimum video
         ]);
 
         $pantai = Pantais::findOrFail($id);
-         // Periksa apakah gambar baru dikirim
-         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($pantai->image);
-            $imagePath = $request->file('image')->store('images_pantai', 'public');
-            $pantai->image = $imagePath;
-            //dd($imagePath);
+        $pantai->komen = $validatedData['komen'];
+
+        // Periksa apakah gambar baru dikirim
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama
+            $imagePantai = PantaiImage::where('pantai_id', $pantai->id)->get();
+            foreach ($imagePantai as $image) {
+                Storage::disk('public')->delete($image->path);
+                $image->delete();
+            }
+
+            // Upload gambar baru
+            foreach ($request->file('image') as $file) {
+                $imagePath = $file->store('images_pantai', 'public');
+                PantaiImage::create([
+                    'path' => $imagePath,
+                    'pantai_id' => $pantai->id
+                ]);
+            }
         }
 
-        // Periksa apakah video baru dikirim
-        if ($request->hasFile('video')) {
-            Storage::disk('public')->delete($pantai->video);
-            $videoPath = $request->file('video')->store('videos_pantai', 'public');
-            $pantai->video = $videoPath;
-            //dd($videoPath);
-        }
-        $pantai->komen = $validatedData['komen'];
         $pantai->save();
 
-        return redirect('/dashboard_stakeholder/pantai')->with('success', 'Pantai updated successfully.');
+        return redirect('/dashboard_stakeholder/pantai')->with('success', 'Komen berhasil dikirim.');
     }
 }

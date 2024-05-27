@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,11 +14,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('SbAdmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
-
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -68,7 +65,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link" href="{{ route('stakeholder.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>

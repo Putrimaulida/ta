@@ -113,6 +113,7 @@ class PantaiController extends Controller
             'pantais.lokasi_pantai',
             'pantais.longitude',
             'pantais.latitude',
+            'pantais.status',
             'pantais.komen',
             'pantais.video',
         )

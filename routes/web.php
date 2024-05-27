@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CitraSatelitController;
 use App\Http\Controllers\DashboardAdminController;
-use App\Http\Controllers\DashboardStakeholder;
+use App\Http\Controllers\DashboardStakeholderController;
 use App\Http\Controllers\DataLapangController;
 use App\Http\Controllers\HasilAnalisisController;
 use App\Http\Controllers\HasilAnalisisStakeholderController;
@@ -100,7 +100,7 @@ Route::prefix('dashboard_admin')->middleware(['auth', 'check.role:admin'])->grou
 });
 
 Route::prefix('/dashboard_stakeholder')->middleware(['auth', 'check.role:stakeholder'])->group(function () {
-    Route::get('/', [DashboardStakeholder::class, 'index'])->name('stakeholder.dashboard');
+    Route::get('/', [DashboardStakeholderController::class, 'index'])->name('stakeholder.dashboard');
     Route::get('/pantai', [PantaiStakeholderController::class, 'index'])->name('stakeholder.pantai');
     Route::get('/pantai/view', [PantaiStakeholderController::class, 'json'])->name('stakeholder.data.pantai');
     Route::get('/pantai/edit/{id}', [PantaiStakeholderController::class, 'edit']);
