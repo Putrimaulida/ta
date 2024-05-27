@@ -68,13 +68,17 @@
                                 <small id="image" class="form-text text-muted">Maksimal file ukuran: 2048 Kb (2
                                     MB)</small>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="video">Video:</label>
                                 <input type="file" name="video" id="video" class="form-control">
                                 <small id="video" class="form-text" text-muted>Maksimal file ukuran: 2048 Kb (2
                                     MB)</small>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="video">Link Video:</label>
+                                <input type="text" name="video" id="video" class="form-control" required>
                             </div>
-                            <div id="map" style="height: 400px;"></div>
+                            <!-- <div id="map" style="height: 400px;"></div> -->
                             <!-- Submit Button -->
                             <div class="row mt-3">
                                 <div class="col-md-12">
@@ -116,7 +120,7 @@
             });
         });
     </script>
-    <script>
+    <!-- <script>
         var defaultLatitude = -8.37501488161054; // Latitude default
         var defaultLongitude = 112.37609297163199; // Longitude default
         var map = L.map('map').setView([defaultLatitude, defaultLongitude], 10);
@@ -150,5 +154,5 @@
 
         // Panggil fungsi setMarkerPosition saat halaman dimuat
         setMarkerPosition();
-    </script>
+    </script> -->
 @endsection

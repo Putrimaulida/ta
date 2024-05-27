@@ -77,13 +77,18 @@
                                 <small id="image" class="form-text" text-muted>Maksimal file ukuran: 2048 Kb
                                     (Mb)</small>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="video">Video:</label>
                                 <input type="file" name="video" id="video" class="form-control">
                                 <small id="video" class="form-text" text-muted>Maksimal file ukuran: 2048 Kb
                                     (Mb)</small>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="video">Link Video:</label>
+                                <input type="text" name="video" id="video" class="form-control"
+                                    value="{{ $pantai->video }}" required>
                             </div>
-                            <div id="map" style="height: 500px;"></div>
+                            <div id="map" style="height: 300px;"></div>
                             <!-- Submit Button -->
                             <div class="row mt-3">
                                 <div class="col-md-12">

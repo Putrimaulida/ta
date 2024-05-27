@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Pantais;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\PantaiRequest;
-use App\Models\CitraSatelit;
 use App\Models\JenisMangrove;
 use App\Models\PantaiImage;
 use Illuminate\Http\Request;
@@ -52,55 +51,6 @@ class PantaiController extends Controller
         return view('admin.pantai.create', compact('jenisMangrove'));
     }
 
-    // public function store(PantaiRequest $request)
-    // {
-    //     // Validasi input
-    //     $validatedData = $request->validate([
-    //         'nama_pantai' => 'required|string',
-    //         'lokasi_pantai' => 'required|string',
-    //         'longitude' => 'required|string',
-    //         'latitude' => 'required|string',
-    //         'jenis_mangrove_id' => 'required|array', // Tipe data array
-    //         'jenis_mangrove_id.*' => 'exists:jenis_mangroves,id', // Pastikan semua nilai ada di tabel jenis_mangroves
-    //         'image' => 'required|file|max:2048', // Validasi ukuran maksimum gambar
-    //         'video' => 'required|file|max:10000', // Validasi ukuran maksimum video
-    //     ]);
-
-    //     // Cek apakah nama pantai sudah ada
-    //     if (Pantais::where('nama_pantai', $validatedData['nama_pantai'])->exists()) {
-    //         return redirect()->back()->withErrors(['nama_pantai' => 'Nama pantai sudah terdaftar.'])->withInput();
-    //     }
-
-    //     // Mengunggah file gambar
-    //     if ($request->hasFile('image')) {
-    //         $imagePath = $request->file('image')->store('images_pantai', 'public');
-    //         $validatedData['image'] = $imagePath;
-    //     }
-
-    //     // Mengunggah file video
-    //     if ($request->hasFile('video')) {
-    //         $videoPath = $request->file('video')->store('videos_pantai', 'public');
-    //         $validatedData['video'] = $videoPath;
-    //     }
-
-    //     // Tambahkan data pantai
-    //     $pantai = Pantais::create([
-    //         'nama_pantai' => $validatedData['nama_pantai'],
-    //         'lokasi_pantai' => $validatedData['lokasi_pantai'],
-    //         'longitude' => $validatedData['longitude'],
-    //         'latitude' => $validatedData['latitude'],
-    //         'image' => $validatedData['image'],
-    //         'video' => $validatedData['video'],
-    //         'status' => 0,
-    //     ]);
-
-    //     // Synchronize jenis mangrove
-    //     $pantai->jenisMangroves()->attach($validatedData['jenis_mangrove_id']);
-
-    //     // Berikan respons yang sesuai
-    //     return redirect('/dashboard_admin/pantai')->with('success', 'Data pantai berhasil ditambahkan.');
-    // }
-
     public function store(PantaiRequest $request)
     {
         // Validasi input
@@ -112,7 +62,7 @@ class PantaiController extends Controller
             'jenis_mangrove_id' => 'required|array',
             'jenis_mangrove_id.*' => 'exists:jenis_mangroves,id',
             'image.*' => 'required|file|max:2048', // Validasi ukuran maksimum setiap gambar
-            'video' => 'required|file|max:10000', // Validasi ukuran maksimum video
+            'video' => 'required|string', // Validasi ukuran maksimum video
         ]);
 
         // Cek apakah nama pantai sudah ada
@@ -174,7 +124,7 @@ class PantaiController extends Controller
     public function showcitra($id)
     {
         $pantai = Pantais::findOrFail($id);
-        $citra = CitraSatelit::where('id', $pantai->id)->first();
+        //$citra = CitraSatelit::where('id', $pantai->id)->first();
         return view('admin.pantai.show', compact('pantai'));
     }
 
@@ -203,7 +153,7 @@ class PantaiController extends Controller
             'jenis_mangrove_id' => 'required|array',
             'jenis_mangrove_id.*' => 'exists:jenis_mangroves,id',
             'image.*' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
-            'video' => 'nullable|file|max:10000', // Validasi ukuran maksimum video
+            'video' => 'required|string', // Validasi ukuran maksimum video
         ]);
 
         $pantai = Pantais::findOrFail($id);

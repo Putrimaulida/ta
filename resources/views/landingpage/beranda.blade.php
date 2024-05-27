@@ -295,7 +295,6 @@
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li><a class="nav-link scrollto" href="#pantai">Data Pantai</a></li>
-                    <li><a class="nav-link scrollto" href="#mangrove">Jenis Mangrove</a></li>
                     <li><a class="nav-link scrollto" href="#rekomendasi">Analisis Data</a></li>
                     <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 </ul>
@@ -403,8 +402,7 @@
                         </div>
                     </div>
                     <!-- Kolom Kiri -->
-                    <div
-                        class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
                         <div class="accordion-list">
                             <ul>
                                 @foreach ($dataPantai->slice(0, ceil($dataPantai->count() / 2)) as $nomor => $pantai)
@@ -416,32 +414,27 @@
                                             <i class="bx bx-chevron-down icon-show"></i>
                                             <i class="bx bx-chevron-up icon-close"></i>
                                         </a>
-                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse"
-                                            data-bs-parent=".accordion-list">
+                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
                                             <p style="text-align: justify;">
-                                                Alamat : {{ $pantai->lokasi_pantai }}
-                                            </p>
-                                            <p style="text-align: justify;">
-                                                Keterangan : {{ $pantai->komen }}
+                                                Pantai {{ $pantai->nama_pantai }} terletak di {{ $pantai->lokasi_pantai }}. 
+                                                Koordinat pantai ini adalah {{ $pantai->latitude }}° LS dan {{ $pantai->longitude }}° BT.
+                                                Jenis-jenis mangrove yang terdapat pada {{ $pantai->nama_pantai }} antara lain:
+                                                @foreach ($pantai->jenisMangroves as $jenisMangrove)
+                                                    {{ $jenisMangrove->nama_ilmiah }}{{ !$loop->last ? ',' : '.' }}
+                                                @endforeach
+                                                {{ $pantai->komen ? 'Keterangan: ' . $pantai->komen . '.' : '' }}
                                             </p>
                                             @if ($pantai->pantaiImages)
-                                                <div id="carouselExampleIndicators-{{ $pantai->id }}"
-                                                    class="carousel slide" data-bs-ride="carousel"
-                                                    style="max-width: 100%;">
+                                                <div id="carouselExampleIndicators-{{ $pantai->id }}" class="carousel slide" data-bs-ride="carousel" style="max-width: 100%;">
                                                     <ol class="carousel-indicators">
                                                         @foreach ($pantai->pantaiImages as $listfoto)
-                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}"
-                                                                data-bs-slide-to="{{ $loop->index }}"
-                                                                class="{{ $loop->first ? 'active' : '' }}"></li>
+                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
                                                         @endforeach
                                                     </ol>
                                                     <div class="carousel-inner">
                                                         @foreach ($pantai->pantaiImages as $listfoto)
-                                                            <div
-                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block w-100" style="height: 350px;"
-                                                                    src="{{ asset('storage/' . $listfoto->path) }}"
-                                                                    alt="Gambar Pantai">
+                                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block w-100" style="height: 350px; object-fit: contain;" src="{{ asset('storage/' . $listfoto->path) }}" alt="Gambar Pantai">
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -454,8 +447,7 @@
                         </div>
                     </div>
                     <!-- Kolom Kanan -->
-                    <div
-                        class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
                         <div class="accordion-list">
                             <ul>
                                 @php $offset = ceil($dataPantai->count() / 2); @endphp
@@ -464,36 +456,31 @@
                                         <a data-bs-toggle="collapse" class="collapse"
                                             data-bs-target="#accordion-list-{{ $pantai->id }}"
                                             style="text-decoration: none;">
-                                            <span>{{ $nomor + 1 }}</span> {{ $pantai->nama_pantai }}
+                                            <span>{{ $nomor + 1 + $offset }}</span> {{ $pantai->nama_pantai }}
                                             <i class="bx bx-chevron-down icon-show"></i>
                                             <i class="bx bx-chevron-up icon-close"></i>
                                         </a>
-                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse"
-                                            data-bs-parent=".accordion-list">
+                                        <div id="accordion-list-{{ $pantai->id }}" class="collapse" data-bs-parent=".accordion-list">
                                             <p style="text-align: justify;">
-                                                Alamat : {{ $pantai->lokasi_pantai }}
-                                            </p>
-                                            <p style="text-align: justify;">
-                                                Keterangan : {{ $pantai->komen }}
+                                                Pantai {{ $pantai->nama_pantai }} terletak di {{ $pantai->lokasi_pantai }}. 
+                                                Koordinat pantai ini adalah {{ $pantai->latitude }}° LS dan {{ $pantai->longitude }}° BT.
+                                                Jenis-jenis mangrove yang terdapat pada {{ $pantai->nama_pantai }} antara lain:
+                                                @foreach ($pantai->jenisMangroves as $jenisMangrove)
+                                                    {{ $jenisMangrove->nama_ilmiah }}{{ !$loop->last ? ',' : '.' }}
+                                                @endforeach
+                                                {{ $pantai->komen ? 'Keterangan: ' . $pantai->komen . '.' : '' }}
                                             </p>
                                             @if ($pantai->pantaiImages)
-                                                <div id="carouselExampleIndicators-{{ $pantai->id }}"
-                                                    class="carousel slide" data-bs-ride="carousel"
-                                                    style="max-width: 100%;">
+                                                <div id="carouselExampleIndicators-{{ $pantai->id }}" class="carousel slide" data-bs-ride="carousel" style="max-width: 100%;">
                                                     <ol class="carousel-indicators">
                                                         @foreach ($pantai->pantaiImages as $listfoto)
-                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}"
-                                                                data-bs-slide-to="{{ $loop->index }}"
-                                                                class="{{ $loop->first ? 'active' : '' }}"></li>
+                                                            <li data-bs-target="#carouselExampleIndicators-{{ $pantai->id }}" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
                                                         @endforeach
                                                     </ol>
                                                     <div class="carousel-inner">
                                                         @foreach ($pantai->pantaiImages as $listfoto)
-                                                            <div
-                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block w-100"
-                                                                    src="{{ asset('storage/' . $listfoto->path) }}"
-                                                                    alt="Gambar Pantai">
+                                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block w-100" style="height: 350px; object-fit: contain;" src="{{ asset('storage/' . $listfoto->path) }}" alt="Gambar Pantai">
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -509,43 +496,7 @@
             </div>
         </section>
 
-
-        <!-- ======= Services Section ======= -->
-        <section id="mangrove" class="contact">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Jenis Mangrove</h2>
-                    <p>Sistem Pengelolaan Vegetasi Mangrove!</p>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="accordion-list">
-                            <ul>
-                                @foreach ($dataMangrove as $mangrove)
-                                    <li>
-                                        <a data-bs-toggle="collapse" class="collapse"
-                                            data-bs-target="#accordion-list-{{ $loop->index + 1 }}"
-                                            style="text-decoration: none;">
-                                            <span>{{ $loop->iteration }}</span> {{ $mangrove->nama_pantai }}
-                                            <i class="bx bx-chevron-down icon-show"></i>
-                                            <i class="bx bx-chevron-up icon-close"></i>
-                                        </a>
-                                        <div id="accordion-list-{{ $loop->index + 1 }}" class="collapse show"
-                                            data-bs-parent=".accordion-list">
-                                            <p style="text-align: justify;">
-                                                {{ $mangrove->nama_ilmiah }}
-                                            </p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="rekomendasi" class="team section-bg">
+        <section id="rekomendasi" class="contact">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Hasil Analisis</h2>
@@ -834,194 +785,6 @@
             </div>
         </section><!-- End Team Section -->
 
-        <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Kami menghargai setiap pertanyaan, umpan balik, atau permintaan bantuan yang Anda sampaikan
-                        kepada kami. Kami ingin memastikan bahwa pengalaman Anda dengan layanan kami adalah yang
-                        terbaik. Oleh karena itu, jika Anda membutuhkan bantuan tambahan atau informasi lebih lanjut
-                        tentang layanan kami, jangan ragu untuk memberi tahu kami. Tim kami selalu siap dan berkomitmen
-                        untuk memberikan dukungan terbaik kepada Anda. Semoga ini memenuhi harapan Anda. Jika Anda
-                        membutuhkan perubahan lebih lanjut atau memiliki permintaan lainnya, beri tahu saya. Kami siap
-                        untuk membantu Anda. Kami ingin menjadikan interaksi dengan kami sebaik mungkin, jadi jangan
-                        ragu untuk menghubungi kami dengan menggunakan rincian kontak di bawah ini.</p>
-                </div>
-
-                <div class="row">
-                    <!-- location -->
-                    <div class="col-lg-5 d-flex align-items-stretch">
-                        <div class="info">
-                            <div class="address">
-                                <i class="bi bi-geo-alt"></i>
-                                <h4>Location:</h4>
-                                <p>Komplek Perkantoran Pemerintah Kabupaten Pasuruan JL.Raya Raci KM - 9 Bangil,
-                                    Pasuruan</p>
-                            </div>
-
-                            <div class="email">
-                                <i class="bi bi-envelope"></i>
-                                <h4>Email:</h4>
-                                <p>diskominfo@pasuruankab.go.id</p>
-                            </div>
-
-                            <div class="phone">
-                                <i class="bi bi-phone"></i>
-                                <h4>Call:</h4>
-                                <p>(0343) 429064</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- map -->
-                    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                        <div class="php-email-form">
-                            <div class="row">
-                                <!-- merubah posisi map -->
-                                <div id="map" style="width: 100%; height: 290px; position: relative;">
-                                    <!-- Menempatkan kontrol di dalam div peta agar dapat diletakkan di atas peta -->
-                                    <div class="map-controls">
-                                        <button id="toggleControls" class="btn btn-info">Toggle Controls</button>
-                                        <div id="controls" class="d-none">
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="search" class="form-control"
-                                                    placeholder="Cari Departemen">
-                                                <button onclick="searchDepartment()" class="btn btn-primary">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                                <button onclick="clearSearch()" class="btn btn-secondary">
-                                                    <i class="fas fa-times"></i>
-                                                    <!-- Ini adalah icon untuk 'clear' atau 'close', Anda dapat menggantinya sesuai kebutuhan -->
-                                                </button>
-                                            </div>
-                                            <label class="custom-checkbox">Tampilkan Marker
-                                                <input type="checkbox" id="toggleMarker" checked
-                                                    onchange="toggleMarker()">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script>
-                                    document.getElementById('toggleControls').addEventListener('click', function() {
-                                        var controls = document.getElementById('controls');
-                                        if (controls.classList.contains('d-none')) {
-                                            controls.classList.remove('d-none');
-                                        } else {
-                                            controls.classList.add('d-none');
-                                        }
-                                    });
-
-                                    function clearSearch() {
-                                        document.getElementById('search').value = ''; // Mengatur nilai dari kotak pencarian menjadi string kosong
-                                    }
-                                    // Inisialisasi peta dengan properti pusat dan zoom awal
-                                    // menampilkan gmaps sebelum login
-                                    var map = L.map('map', {
-                                        center: [-8.230845, 112.591375],
-                                        zoom: 10,
-                                        attributionControl: false
-                                    });
-
-                                    // Inisialisasi lapisan peta jalanan
-                                    var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                                        maxZoom: 100,
-                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                                        attribution: false
-                                    });
-
-                                    // Inisialisasi lapisan peta satelit
-                                    var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                                        maxZoom: 100,
-                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                                        attribution: false
-                                    });
-
-                                    // Menambahkan lapisan jalanan ke peta
-                                    map.addLayer(streets);
-
-                                    // Inisialisasi grup marker untuk departemen-departemen
-                                    var markerLayer = L.layerGroup().addTo(map);
-
-
-                                    function searchDepartment() {
-                                        var searchValue = document.getElementById('search').value.toLowerCase();
-                                        markerLayer.eachLayer(function(layer) {
-                                            var popupContent = layer.getPopup().getContent().toLowerCase();
-                                            if (popupContent.includes(searchValue)) {
-                                                map.setView(layer.getLatLng(), map.getZoom());
-                                                layer.openTooltip(); // Buka tooltip saat pencarian cocok.
-                                            } else {
-                                                layer.closeTooltip(); // Tutup tooltip untuk marker lain yang tidak cocok.
-                                            }
-                                        });
-                                    }
-
-
-                                    // Fungsi untuk menampilkan/menyembunyikan marker
-                                    function toggleMarker() {
-                                        var isChecked = document.getElementById('toggleMarker').checked;
-                                        if (isChecked) {
-                                            markerLayer.addTo(map);
-                                        } else {
-                                            map.removeLayer(markerLayer);
-                                        }
-                                    }
-                                    // Iterasi melalui data departemen dan menambahkan marker jika koordinat dan nama tersedia
-
-                                    // Menentukan pilihan lapisan peta
-                                    var baseLayers = {
-                                        "Streets": streets,
-                                        "Satellite": satellite
-                                    };
-
-                                    // Membuat tombol "Toggle View" untuk beralih antara lapisan peta
-                                    var toggleButton = L.Control.extend({
-                                        options: {
-                                            position: 'bottomleft'
-                                        },
-
-                                        onAdd: function(map) {
-                                            // Membuat elemen tombol
-                                            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-                                            container.style.backgroundColor = 'white';
-                                            container.style.padding = '5px 10px';
-                                            container.style.borderRadius = '5px';
-                                            container.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-                                            container.innerHTML = 'Toggle View';
-
-                                            // Menangani klik pada tombol untuk mengganti lapisan peta
-                                            container.onclick = function() {
-                                                if (map.hasLayer(satellite)) {
-                                                    map.removeLayer(satellite);
-                                                    streets.addTo(map);
-                                                    container.innerHTML = 'Toggle View';
-                                                } else {
-                                                    map.removeLayer(streets);
-                                                    satellite.addTo(map);
-                                                    container.innerHTML = 'Toggle View';
-                                                }
-                                            }
-
-                                            return container;
-                                        }
-                                    });
-
-                                    // Menambahkan tombol "Toggle View" sebagai kontrol peta
-                                    map.addControl(new toggleButton());
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-        </section><!-- End Contact Section -->
-
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
@@ -1048,38 +811,17 @@
         </div>
         </div> --}}
 
-        <div class="modal fade" id="trackResultModal" tabindex="-1" role="dialog"
-            aria-labelledby="trackResultModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="trackResultModalLabel">Ticket Tracking Result</h5>
-                        <button type="button" class="close" data-dismiss="modal" id="closeModalX">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="userName">Nama Pengadu: No user name found.</p>
-                        <p id="ticketStatus">Status Pengaduan: No ticket status found.</p>
-                        <p id="ticketTitle">Judul Pengaduan: No ticket title found.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="closeModalButton">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="footer-top">
-            <div class="container">
+            <div class="container" class="why-us section-bg">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mx-auto text-center">
-                        <h4>SIPMA Pasuruan</h4>
+                        <h4>Mangrove.In</h4>
                         <p>
                             Jl. Raya Raci Km. 09 <br>
-                            Pasuruan - Bangil Dinas Komunikasi dan Informatika Kabupaten Pasuruan 671115<br>
+                            Malang Kabupaten - Pemerintah Kabupaten Malang 671115<br>
                             Indonesia <br><br>
                             <strong>Telepon/Fax:</strong> 0343429064<br>
-                            <strong>Email:</strong> diskominfo@pasuruankab.go.id<br>
+                            <strong>Email:</strong> mangrovein@malangkab.go.id<br>
                         </p>
                     </div>
 
@@ -1127,14 +869,7 @@
 
         <div class="container footer-bottom clearfix">
             <div class="copyright">
-                &copy; Copyright <strong><span>PKL 2023</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                &copy; Copyright <strong><span>Mangrove.In 2024</span></strong>. All Rights Reserved
             </div>
         </div>
     </footer><!-- End Footer -->
