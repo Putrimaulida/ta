@@ -52,10 +52,11 @@
                                     </div>
                                 @endif
                             <p><strong>Video:</strong></p>
-                            <video controls width="300" height="auto">
+                            <!-- <video controls width="300" height="auto">
                                 <source src="{{ asset('storage/' . $pantai->video) }}" type="video/mp4">
                                 Browser Anda tidak mendukung tag video.
-                            </video>
+                            </video> -->
+                            <input type="text"  class="form-control" value="{{ $pantai->video }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="status">Status:</label><br>
