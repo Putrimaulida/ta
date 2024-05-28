@@ -260,17 +260,18 @@ class HasilAnalisisController extends Controller
             $b = 0;
         }
         $a = ($sum_y - ($b * $sum_x)) / $n;
-        // $Y = $a + ($b * $dataCitra->max('tahun'));
-        // $countYear = count($dataCitra);
         $result = $a + ($b * $index);
 
         $resultFor2024 = [$dataCitra->max('tahun') + 1 => $result];
         $lastYear = $dataCitra->max('tahun');
         $lastYearArea = $luasanTahun[$lastYear];
-        $trendConclusion = ($result < $lastYearArea) ? 'negatif' : 'positif';
+        $trendConclusion = ($result < $lastYearArea) ? 'negatif. Dengan beberapa kemungkinan dianataranya masih kurangnya kepedulian masyarakat tentang pentingnya ekosistem mangrove untuk menjaga keletarian mangrove, selain itu terjadinya penebangan pohon mangrove untuk bahan bakar, pembangunan infrastruktur, abrasi pantai, dll' 
+        : 'positif. Mangrove bertambah signifikan.';
         $year = date('Y');
-        //$conclusion = "Hasil analisis menunjukkan luasan mangrove pada tahun <strong>$year</strong> adalah <strong>$result</strong>. Dengan kondisi mangrove mengalami trend <strong>$trendConclusion</strong>.";
-        $conclusion = "Hasil analisis menunjukkan luasan mangrove pada tahun <strong>$year</strong> adalah <strong>$result</strong> dengan nilai <strong>a = $a</strong> dan <strong>b = $b</strong> serta <strong>n = $n</strong>, <strong> sum_y = $sum_y</strong>, <strong> sum_x = $sum_x</strong>, <strong> sum_xy = $sum_xy</strong>, <strong> sum_x_squared = $sum_x_squared</strong>. Dengan kondisi mangrove mengalami trend <strong>$trendConclusion</strong>.";
+        $conclusion = "Hasil analisis menunjukkan luasan mangrove pada tahun <strong>$year</strong> adalah <strong>$result</strong> 
+        dengan nilai <strong>a = $a</strong> dan <strong>b = $b</strong> serta <strong>n = $n</strong>, <strong> sum_y = $sum_y</strong>, 
+        <strong> sum_x = $sum_x</strong>, <strong> sum_xy = $sum_xy</strong>, <strong> sum_x_squared = $sum_x_squared</strong>. 
+        Dengan kondisi mangrove mengalami trend <strong>$trendConclusion</strong>.";
 
         return response()->json([
             'success' => true,

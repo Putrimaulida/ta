@@ -35,4 +35,9 @@ class Pantais extends Model
     {
         return $this->hasMany(PantaiImage::class, 'pantai_id');
     }
+
+    public function getStatusTextAttribute()
+    {
+        return $this->status == 1 ? 'diterima' : 'ditolak';
+    }
 }

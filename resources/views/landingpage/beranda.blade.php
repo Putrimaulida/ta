@@ -394,12 +394,9 @@
                 <div class="row">
                     <!-- Bagian Tengah untuk Data Pantai -->
                     <div class="col-12 text-center">
-                        <div class="content">
-                            <h3>Data <strong>Pantai</strong></h3>
-                            <p style="text-align: justify;">
-                                Berikut data pantai yang ada di Kabupaten Malang Selatan
-                            </p>
-                        </div>
+                        <div class="section-title">
+                        <h2>Data Pantai</h2>
+                    </div>
                     </div>
                     <!-- Kolom Kiri -->
                     <div class="col-lg-6 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1">
@@ -456,7 +453,7 @@
                                         <a data-bs-toggle="collapse" class="collapse"
                                             data-bs-target="#accordion-list-{{ $pantai->id }}"
                                             style="text-decoration: none;">
-                                            <span>{{ $nomor + 1 + $offset }}</span> {{ $pantai->nama_pantai }}
+                                            <span>{{ $nomor + 1 }}</span> {{ $pantai->nama_pantai }}
                                             <i class="bx bx-chevron-down icon-show"></i>
                                             <i class="bx bx-chevron-up icon-close"></i>
                                         </a>

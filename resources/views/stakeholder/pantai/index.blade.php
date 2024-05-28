@@ -9,7 +9,7 @@
     <script>
         setTimeout(function() {
             document.getElementById('logout-form').submit();
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 5000); // 5000 milidetik = 5 detik
     </script>
 </div>
 @endif
@@ -42,6 +42,7 @@
                         <th>Lokasi</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -52,39 +53,20 @@
     </div>
 </div>
 
-
 <script>
     $(document).ready(function() {
         new DataTable('#usersTable', {
             processing: true,
             serverSide: true,
             ajax: '{{ route("stakeholder.data.pantai") }}',
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'nama_pantai',
-                    name: 'nama_pantai'
-                },
-                {
-                    data: 'lokasi_pantai',
-                    name: 'lokasi_pantai'
-                },
-                {
-                    data: 'longitude',
-                    name: 'longitude'
-                },
-                {
-                    data: 'latitude',
-                    name: 'latitude'
-                },
-                {
-                    data: 'action',
-                    name: 'action'
-                },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'nama_pantai', name: 'nama_pantai' },
+                { data: 'lokasi_pantai', name: 'lokasi_pantai' },
+                { data: 'longitude', name: 'longitude' },
+                { data: 'latitude', name: 'latitude' },
+                { data: 'status', name: 'status' },
+                { data: 'action', name: 'action' },
             ]
         });
     });

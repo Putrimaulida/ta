@@ -13,25 +13,35 @@ use Illuminate\Support\Facades\Storage;
 
 class PantaiStakeholderController extends Controller
 {
-
     public function json()
-        {
-            $pantais = Pantais::select(['id', 'nama_pantai', 'lokasi_pantai', 'longitude', 'latitude'])
-                ->get();
-            $index = 1;
-            return DataTables::of($pantais)
-                ->addColumn('DT_RowIndex', function ($data) use (&$index) {
-                    return $index++; // Menambahkan nomor urutan baris
-                })
-                ->addColumn('action', function ($row) {
-                    $editUrl = url('/dashboard_stakeholder/pantai/edit/' . $row->id);
-                    $viewUrl = url('/dashboard_stakeholder/pantai/view/' . $row->id);
-                    return '<button type="button" class="btn btn-warning btn-sm" onclick="window.location.href=\'' . $editUrl . '\'"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-info btn-sm" onclick="window.location.href=\'' . $viewUrl . '\'"><i class="fas fa-list"></i></button>';
-                    // Tukar posisi tombol view dengan tombol delete
-                })
-                ->toJson();
-        }
+    {
+        $pantais = Pantais::select(['id', 'nama_pantai', 'lokasi_pantai', 'longitude', 'latitude', 'status', 'komen'])
+            ->get();
+        $index = 1;
+        return DataTables::of($pantais)
+            ->addColumn('DT_RowIndex', function ($data) use (&$index) {
+                return $index++; // Menambahkan nomor urutan baris
+            })
+            ->addColumn('status', function ($row) {
+                if (empty($row->komen)) {
+                    return '<span>-</span>';
+                } elseif ($row->status == 1) {
+                    return '<span class="badge badge-success">diterima</span>';
+                } elseif ($row->status == 0 && !empty($row->komen)) {
+                    return '<span class="badge badge-warning">diproses</span>';
+                } else {
+                    return '<span class="badge badge-danger">ditolak</span>';
+                }
+            })
+            ->addColumn('action', function ($row) {
+                $editUrl = url('/dashboard_stakeholder/pantai/edit/' . $row->id);
+                $viewUrl = url('/dashboard_stakeholder/pantai/view/' . $row->id);
+                return '<button type="button" class="btn btn-warning btn-sm" onclick="window.location.href=\'' . $editUrl . '\'"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-info btn-sm" onclick="window.location.href=\'' . $viewUrl . '\'"><i class="fas fa-list"></i></button>';
+            })
+            ->rawColumns(['status', 'action'])
+            ->toJson();
+    }
 
     public function index()
     {
@@ -52,16 +62,14 @@ class PantaiStakeholderController extends Controller
         return view('stakeholder.pantai.detail', compact('pantai'));
     }
 
-    // menampilkan view update
     public function edit($id)
     {
         $pantai = Pantais::findOrFail($id);
         return view('stakeholder.pantai.edit', compact('pantai'));
     }
-    
+
     public function update(Request $request, $id)
     {
-        // Validasi input
         $validatedData = $request->validate([
             'komen' => 'required',
             'image.*' => 'nullable|file|max:2048', // Validasi ukuran maksimum gambar
@@ -70,17 +78,15 @@ class PantaiStakeholderController extends Controller
 
         $pantai = Pantais::findOrFail($id);
         $pantai->komen = $validatedData['komen'];
+        $pantai->status = 0; // Reset status ke "diproses" setelah update
 
-        // Periksa apakah gambar baru dikirim
         if ($request->hasFile('image')) {
-            // Hapus gambar lama
             $imagePantai = PantaiImage::where('pantai_id', $pantai->id)->get();
             foreach ($imagePantai as $image) {
                 Storage::disk('public')->delete($image->path);
                 $image->delete();
             }
 
-            // Upload gambar baru
             foreach ($request->file('image') as $file) {
                 $imagePath = $file->store('images_pantai', 'public');
                 PantaiImage::create([
